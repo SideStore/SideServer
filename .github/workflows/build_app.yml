@@ -34,9 +34,18 @@ jobs:
           set-env-from-proj PROJECT_NAME
 
       - name: Build and install app
-        shell: bash
         run: |
-          xcodebuild -scheme "$SCHEME" install DSTROOT=build/root
+          xcodebuild -project AltStore.xcodeproj \
+                      -scheme AltServer \
+                      -sdk macosx \
+                      install \
+                      CODE_SIGNING_REQUIRED=NO \
+                      AD_HOC_CODE_SIGNING_ALLOWED=YES \
+                      CODE_SIGNING_ALLOWED=NO \
+                      DEVELOPMENT_TEAM=XYZ0123456 \
+                      ORG_IDENTIFIER=com.SideStore \
+                      DSTROOT=build/root \
+                      | xcpretty && exit ${PIPESTATUS[0]}
 
       - name: Package app
         run: |
