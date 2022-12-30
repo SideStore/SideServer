@@ -10,7 +10,6 @@ on:
 
 env:
   SCHEME: AltServer
-  XCTOOL_XCODE_VERSION: 14.2
 
 jobs:
   master_deploy:
@@ -25,7 +24,7 @@ jobs:
       - name: Setup Xcode
         uses: maxim-lobanov/setup-xcode@v1.4.1
         with:
-          xcode-version: ${ XCTOOL_XCODE_VERSION }
+          xcode-version: 14.2
 
       - name: Set environment variables from project settings
         run: |
