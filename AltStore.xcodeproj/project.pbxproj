@@ -880,6 +880,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				B3991616295FA96300136B2C /* PBXTargetDependency */,
 				BFF7C90E257844C900E55F36 /* PBXTargetDependency */,
 				0380808C28C6E10300C653E1 /* PBXTargetDependency */,
 			);
@@ -1208,6 +1209,10 @@
 			target = BF45872A2298D31600BD7491 /* libimobiledevice */;
 			targetProxy = 0380808B28C6E10300C653E1 /* PBXContainerItemProxy */;
 		};
+		B3991616295FA96300136B2C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = B3991615295FA96300136B2C /* AltSign-Dynamic */;
+		};
 		BFF7C90E257844C900E55F36 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = BFF7C903257844C900E55F36 /* AltXPC */;
@@ -1254,6 +1259,7 @@
 					"\"PACKAGE_STRING=\\\"AltServer 1.0\\\"\"",
 				);
 				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
 					"\"$(SRCROOT)/Dependencies/AltSign/Dependencies/ldid/libplist/include\"",
 					"\"$(SRCROOT)/Dependencies/libimobiledevice\"",
 					"\"$(SRCROOT)/Dependencies/libimobiledevice/include\"",
@@ -1308,6 +1314,7 @@
 					"\"PACKAGE_STRING=\\\"AltServer 1.0\\\"\"",
 				);
 				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
 					"\"$(SRCROOT)/Dependencies/AltSign/Dependencies/ldid/libplist/include\"",
 					"\"$(SRCROOT)/Dependencies/libimobiledevice\"",
 					"\"$(SRCROOT)/Dependencies/libimobiledevice/include\"",
@@ -1355,6 +1362,7 @@
 				);
 				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/Dependencies/AltSign/Dependencies/libzip/xcode\"",
 					"\"$(SRCROOT)/Dependencies/libplist/include\"",
 					"\"$(SRCROOT)/Dependencies/libimobiledevice\"",
 					"\"$(SRCROOT)/Dependencies/libimobiledevice/include\"",
@@ -1363,7 +1371,7 @@
 					"\"$(SRCROOT)/Dependencies/AltSign/Dependencies/libzip/lib\"",
 					"\"$(SRCROOT)/Dependencies/libplist/libcnary/include\"",
 					"\"${SDKROOT}/usr/include/libxml2\"",
-					"\"$(SRCROOT)/Dependencies/AltSign/Dependencies/libzip/xcode\"",
+					"$(inherited)",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_NAME = imobiledevice;
@@ -1393,6 +1401,7 @@
 				);
 				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/Dependencies/AltSign/Dependencies/libzip/xcode\"",
 					"\"$(SRCROOT)/Dependencies/libplist/include\"",
 					"\"$(SRCROOT)/Dependencies/libimobiledevice\"",
 					"\"$(SRCROOT)/Dependencies/libimobiledevice/include\"",
@@ -1401,7 +1410,7 @@
 					"\"$(SRCROOT)/Dependencies/AltSign/Dependencies/libzip/lib\"",
 					"\"$(SRCROOT)/Dependencies/libplist/libcnary/include\"",
 					"\"${SDKROOT}/usr/include/libxml2\"",
-					"\"$(SRCROOT)/Dependencies/AltSign/Dependencies/libzip/xcode\"",
+					"$(inherited)",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_NAME = imobiledevice;
@@ -1523,6 +1532,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Dependencies/AltSign/Dependencies/OpenSSL/iphoneos/include\"",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -1585,6 +1598,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Dependencies/AltSign/Dependencies/OpenSSL/iphoneos/include\"",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -1763,6 +1780,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		B3991615295FA96300136B2C /* AltSign-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = "AltSign-Dynamic";
+		};
 		B3C395FB284F3B2400DA9E2F /* Sparkle */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B3C395FA284F3B2400DA9E2F /* XCRemoteSwiftPackageReference "Sparkle" */;
