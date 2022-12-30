@@ -1,10 +1,16 @@
-name: build_app
+name: Build .app
 
-on: [push, workflow_dispatch]
+on:
+  push:
+    branches:
+      - master
+      - develop
+  pull_request:
+  workflow_dispatch:
 
 env:
   SCHEME: AltServer
-  
+
 jobs:
   master_deploy:
     runs-on: macos-latest
@@ -13,11 +19,11 @@ jobs:
       - name: Checkout project
         uses: actions/checkout@v2
         with:
-          submodules: recursive  
-          
+          submodules: recursive
+
       - name: Set environment variables from project settings
         run: |
-          function set-env-from-proj { 
+          function set-env-from-proj {
             echo "$1=$(xcodebuild -scheme "AltServer" -showBuildSettings | grep " $1 " | sed "s/[ ]*$1 = //")" >> $GITHUB_ENV
           }
           set-env-from-proj FULL_PRODUCT_NAME
