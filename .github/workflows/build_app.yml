@@ -38,6 +38,9 @@ jobs:
           set-env-from-proj PRODUCT_NAME
           set-env-from-proj PROJECT_NAME
 
+      - name: Install OpenSSL
+        run: brew install openssl
+          
       - name: Build and install app
         run: |
           xcodebuild -project AltStore.xcodeproj \
