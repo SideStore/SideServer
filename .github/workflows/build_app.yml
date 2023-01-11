@@ -39,7 +39,8 @@ jobs:
           set-env-from-proj PROJECT_NAME
 
       - name: Install OpenSSL
-        run: brew install openssl
+        run: |
+          brew install openssl
           
       - name: Build and install app
         run: |
@@ -53,6 +54,8 @@ jobs:
                       DEVELOPMENT_TEAM=XYZ0123456 \
                       ORG_IDENTIFIER=com.SideStore \
                       DSTROOT=build/root \
+                      LDFLAGS="-L/usr/local/opt/openssl@3/lib" \
+                      CPPFLAGS="-I/usr/local/opt/openssl@3/include"
                       | xcpretty && exit ${PIPESTATUS[0]}
 
       - name: Package app
