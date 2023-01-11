@@ -1,24 +1,36 @@
-name: build_app
+name: Build .app
 
-on: [push, workflow_dispatch]
+on:
+  push:
+    branches:
+      - master
+      - develop
+  pull_request:
+  workflow_dispatch:
 
 env:
   SCHEME: AltServer
-  
+
 jobs:
   master_deploy:
-    runs-on: macos-latest
+    runs-on: macos-12
 
     steps:
       - name: Checkout project
         uses: actions/checkout@v2
         with:
-          submodules: recursive  
-          
+          submodules: recursive
+
+      - name: Setup Xcode
+        uses: maxim-lobanov/setup-xcode@v1.4.1
+        with:
+          xcode-version: 14.2
+
       - name: Set environment variables from project settings
         run: |
-          function set-env-from-proj { 
-            echo "$1=$(xcodebuild -scheme "AltServer" -showBuildSettings | grep " $1 " | sed "s/[ ]*$1 = //")" >> $GITHUB_ENV
+          BUILD_SETTINGS=$(xcodebuild -scheme "AltServer" -showBuildSettings)
+          function set-env-from-proj {
+            echo "$1=$(echo $BUILD_SETTINGS | grep " $1 " | sed "s/[ ]*$1 = //")" >> $GITHUB_ENV
           }
           set-env-from-proj FULL_PRODUCT_NAME
           set-env-from-proj INSTALL_PATH
@@ -27,10 +39,30 @@ jobs:
           set-env-from-proj PRODUCT_NAME
           set-env-from-proj PROJECT_NAME
 
-      - name: Build and install app
-        shell: bash
+      - name: Install OpenSSL
         run: |
-          xcodebuild -scheme "$SCHEME" install DSTROOT=build/root | xcpretty
+          brew install openssl@3
+          LD_LIBRARY_PATH=/usr/local/opt/openssl@3/lib:"${LD_LIBRARY_PATH}"
+          CPATH=/usr/local/opt/openssl@3/include:"${CPATH}"
+          PKG_CONFIG_PATH=/usr/local/opt/openssl@3/lib/pkgconfig:"${PKG_CONFIG_PATH}"
+          export LD_LIBRARY_PATH CPATH PKG_CONFIG_PATH
+          echo "OPENSSL_LDFLAGS=$(pkg-config openssl --libs)" >> $GITHUB_ENV
+          
+      - name: Build and install app
+        run: |
+          xcodebuild -project AltStore.xcodeproj \
+                      -scheme AltServer \
+                      -sdk macosx \
+                      install \
+                      CODE_SIGNING_REQUIRED=NO \
+                      AD_HOC_CODE_SIGNING_ALLOWED=YES \
+                      CODE_SIGNING_ALLOWED=NO \
+                      DEVELOPMENT_TEAM=XYZ0123456 \
+                      ORG_IDENTIFIER=com.SideStore \
+                      DSTROOT=build/root \
+                      OTHER_LDFLAGS="-L/usr/local/opt/openssl@3/lib $OPENSSL_LDFLAGS" \
+                      OTHER_CPPFLAGS="-I/usr/local/opt/openssl@3/include"
+                      | xcpretty && exit ${PIPESTATUS[0]}
 
       - name: Package app
         run: |
